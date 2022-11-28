@@ -8,6 +8,7 @@ import { Routes, Route, link, Outlet } from "react-router-dom";
 import Event from './components/Event'
 import {useState} from 'react'
 import data from './data'
+import axios from 'axios'
 
 function App() {
   // let navigate = useNavigate();
@@ -44,6 +45,16 @@ function App() {
           <Route path='two' element={<div>생일기념 쿠폰받기</div>} />
         </Route>
       </Routes>
+      <button onClick={()=> {
+        axios.get('https://codingapple1.github.io/shop/data2.json')
+        .then((결과)=> {
+          console.log(결과.data)
+          return (
+          <>
+          </>
+          )
+        })
+      }}> 버튼</button>
     </div>
   );
 }
