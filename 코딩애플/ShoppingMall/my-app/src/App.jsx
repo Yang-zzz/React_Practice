@@ -6,13 +6,20 @@ import Navbar from 'react-bootstrap/Navbar';
 import Detail from './components/Detail.jsx'
 import { Routes, Route, link, Outlet } from "react-router-dom";
 import Event from './components/Event'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import data from './data'
 import axios from 'axios'
 
 function App() {
   // let navigate = useNavigate();
-  let [shoes] = useState(data);
+  let [shoes, setShoes] = useState(data);
+  let [count, setCount] = useState(2);
+  let [] =useState();
+
+  useEffect(()=>{
+
+  },[]);
+
 
   return (
     <div className="App">
@@ -46,13 +53,16 @@ function App() {
         </Route>
       </Routes>
       <button onClick={()=> {
-        axios.get('https://codingapple1.github.io/shop/data2.json')
+
+        axios.get(`https://codingapple1.github.io/shop/data${count}.json`)
         .then((결과)=> {
-          console.log(결과.data)
-          return (
-          <>
-          </>
-          )
+          let copy = [...shoes, ...결과.data];
+          setShoes(copy);
+          setCount(count+1)
+        })
+        // axios.post('/safdf',)
+        .catch(()=>{
+          alert("상품이 없습니다.")
         })
       }}> 버튼</button>
     </div>

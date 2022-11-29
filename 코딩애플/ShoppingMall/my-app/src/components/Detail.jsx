@@ -2,6 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { useEffect, useState } from 'react';
+import Nav from 'react-bootstrap/Nav';
 
 // let Yellowbtn = styled.button`
 //   background: ${ props => props.bg };
@@ -27,13 +28,21 @@ export default function Detail(props) {
     // },[])
 
     let [count, setCount] = useState(0);
-
     let {id} = useParams();
     let 찾은상품 = props.shoes.find(x => x.id == id);
     let [alert, setAlert] = useState(true);
+    let [tab, setTab] = useState(0);
+    let [fade, setFade] = useState('');
+
+    useEffect(()=>{
+        setTimeout(() => {setFade('end')},100)
+        return () => {
+            setFade('')
+        }
+    },[]);
 
   return (
-      <div className="container">
+      <div className={`container start ${fade}`}>
           {
               alert ===true ?
               <div className="alert alert-warning">
@@ -53,9 +62,40 @@ export default function Detail(props) {
                   <p>{props.shoes[id].content}</p>
                   <p>{props.shoes[id].price}</p>
                   <button className="btn btn-danger">주문하기</button>
-                  <input onSubmit="" type="text" />
               </div>
           </div>
+          <Nav variant="tabs" defaultActiveKey="link0">
+              <Nav.Item>
+                  <Nav.Link eventKey="linke0" onClick={()=> {setTab(0)}}>버튼0</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                  <Nav.Link eventKey="linke1" onClick={()=>{setTab(1)}}>버튼1</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                  <Nav.Link eventKey="linke2" onClick={()=>{setTab(2)}}>버튼2</Nav.Link>
+              </Nav.Item>
+          </Nav>
+          <TabContent tab={tab}/>
       </div> 
   )
 };
+
+function TabContent({tab}, {fade}, {setFade}) {
+    useEffect(()=> {
+        setTimeout(()=>{ setFade('end')},100);
+        return (()=> {setFade('')})
+    },[tab]);
+
+    // if(tab === 0) {
+    //     return <div className={`start ${fade}`}>탭 0</div>
+    // } else if (tab === 1) {
+    //     return <div className="start end">탭 1</div>
+    // } else if(tab === 2) {
+    //     return <div className="start end">탭2</div>
+    // }
+    return (
+    <div className={`start ${fade}`}>
+        {[<div>탭1</div>,<div>탭2</div>,<div>탭3</div>][tab]}
+    </div>
+    )
+}
