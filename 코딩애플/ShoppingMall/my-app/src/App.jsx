@@ -6,20 +6,18 @@ import Navbar from 'react-bootstrap/Navbar';
 import Detail from './components/Detail.jsx'
 import { Routes, Route, link, Outlet } from "react-router-dom";
 import Event from './components/Event'
-import {useEffect, useState} from 'react'
+import {useEffect, useState, createContext} from 'react'
 import data from './data'
 import axios from 'axios'
+import Cart from './components/Cart'
+
+ export let Context1 = createContext() // 그냥 보관함
 
 function App() {
   // let navigate = useNavigate();
   let [shoes, setShoes] = useState(data);
   let [count, setCount] = useState(2);
-  let [] =useState();
-
-  useEffect(()=>{
-
-  },[]);
-
+  let [재고, set재고] = useState([10,11,12]);
 
   return (
     <div className="App">
@@ -42,8 +40,14 @@ function App() {
         }
         />
         <Route path="/detail" element={<Detail shoes={shoes}/>} />
+        <Route path="/detail/:id" element={
+        <Context1.Provider value={{재고, shoes}}>
+        <Detail shoes={shoes}/> 
+        </Context1.Provider>
+        }/>
         <Route path="/detail/:id" element={<Detail shoes={shoes}/>} />
-        <Route path="/detail/:id" element={<Detail shoes={shoes}/>} />
+        <Route path="/cart" element={<Cart />}>
+        </Route>
         <Route path="*" element={<div>없는 페이지</div>} />
         <Route path="/about" element={<div>about</div>} />
 

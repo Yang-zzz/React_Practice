@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { useEffect, useState } from 'react';
 import Nav from 'react-bootstrap/Nav';
+import { Context1 } from "./../App"
 
 // let Yellowbtn = styled.button`
 //   background: ${ props => props.bg };
@@ -11,6 +12,8 @@ import Nav from 'react-bootstrap/Nav';
 // `
 
 export default function Detail(props) {
+
+    let {재고, shoes} = useContext(Context1);
 
     useEffect(()=> {
         let a = setTimeout(()=>{setAlert(false)},2000)
@@ -32,17 +35,17 @@ export default function Detail(props) {
     let 찾은상품 = props.shoes.find(x => x.id == id);
     let [alert, setAlert] = useState(true);
     let [tab, setTab] = useState(0);
-    let [fade, setFade] = useState('');
+    let [fade2, setFade2] = useState('');
 
     useEffect(()=>{
-        setTimeout(() => {setFade('end')},100)
+        setTimeout(() => {setFade2('end')},100)
         return () => {
-            setFade('')
+            setFade2('')
         }
     },[]);
 
   return (
-      <div className={`container start ${fade}`}>
+      <div className={`container start ${fade2}`}>
           {
               alert ===true ?
               <div className="alert alert-warning">
@@ -75,16 +78,18 @@ export default function Detail(props) {
                   <Nav.Link eventKey="linke2" onClick={()=>{setTab(2)}}>버튼2</Nav.Link>
               </Nav.Item>
           </Nav>
-          <TabContent tab={tab}/>
+          <TabContent tab={tab} />
       </div> 
   )
 };
 
-function TabContent({tab}, {fade}, {setFade}) {
+function TabContent(props) {
+    let {재고, shoes} = useContext(Context1);
+    let [fade, setFade] = useState('');
     useEffect(()=> {
         setTimeout(()=>{ setFade('end')},100);
         return (()=> {setFade('')})
-    },[tab]);
+    },[props.tab]);
 
     // if(tab === 0) {
     //     return <div className={`start ${fade}`}>탭 0</div>
@@ -95,7 +100,7 @@ function TabContent({tab}, {fade}, {setFade}) {
     // }
     return (
     <div className={`start ${fade}`}>
-        {[<div>탭1</div>,<div>탭2</div>,<div>탭3</div>][tab]}
+        {[<div>{shoes[0].title}</div>,<div>탭2</div>,<div>탭3</div>][props.tab]}
     </div>
     )
 }
