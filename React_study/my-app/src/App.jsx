@@ -8,6 +8,8 @@ import Student from "./Student";
 
 // useReducer의 첫번째 파라미터 : reducer함수
 const reducer = (state, action) => {
+  console.log(state)
+  console.log(action)
   switch (action.type) {
     case "add-student":
       const name = action.payload.name;
@@ -51,8 +53,9 @@ const initialState = {
 function App() {
   const [name, setName] = useState("");
   const [studentsInfo, dispatch] = useReducer(reducer, initialState);
+  console.log(studentsInfo);
   // studentsInfo : 현재 데이터의 상태
-  // dispatch : 변경될(업데이트) 데이터를 담고있음.
+  // dispatch : 변경 될(업데이트) action 데이터를 가지고 있음.
 
   return (
     <div>
