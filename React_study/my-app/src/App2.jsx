@@ -7,7 +7,7 @@ function countActiveUsers(users) {
   return users.filter(user => user.active).length;
 }
 
-function App() {
+function App2() {
   const [inputs, setInputs] = useState({
     username: '',
     email: ''
@@ -76,7 +76,7 @@ function App() {
         username={username}
         email={email}
         onChange={onChange}
-        onCreate={onCreate}
+        onCwreate={onCreate}
       />
       <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
       <div>활성사용자 수 : {count}</div>
@@ -84,4 +84,4 @@ function App() {
   );
 }
 
-export default App;
+export default App2;
