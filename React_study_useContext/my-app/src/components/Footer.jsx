@@ -1,6 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
+import Test from "./Test";
 
 const Footer = () => {
   const { isDark, setIsDark } = useContext(ThemeContext);
@@ -15,6 +16,7 @@ const Footer = () => {
       <button className="button" onClick={toggleTheme}>
         DarkMode
       </button>
+      <Test></Test>
     </footer>
   );
 };

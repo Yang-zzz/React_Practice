@@ -6,6 +6,8 @@ import { UserContext } from "../context/UserContext";
 const Content = () => {
   const { isDark } = useContext(ThemeContext);
   const user = useContext(UserContext);
+  
+
   return (
     <div
       className="content"

@@ -1,17 +1,20 @@
-import { useState } from "react";
+// import { useState } from "react";
+// import { ThemeContext } from "./context/ThemeContext";
+// import { UserContext } from "./context/UserContext";
+import { ThemeContextProvider } from "./context/ThemeContext";
 import Page from "./components/Page";
-import { ThemeContext } from "./context/ThemeContext";
-import { UserContext } from "./context/UserContext";
 
 function App() {
-  const [isDark, setIsDark] = useState(false);
+  // const [isDark, setIsDark] = useState(false);
 
   return (
-    <UserContext.Provider value={'양지성'}>
-      <ThemeContext.Provider value={{ isDark, setIsDark }}>
-        <Page />
-      </ThemeContext.Provider>
-    </UserContext.Provider>
+    // <UserContext.Provider value={"양지성"}>
+    //   <ThemeContext.Provider value={{ isDark, setIsDark }}>
+    <ThemeContextProvider>
+      <Page />
+    </ThemeContextProvider>
+    //   </ThemeContext.Provider>
+    // </UserContext.Provider>
   );
 }
 export default App;
