@@ -2,29 +2,25 @@ import React from "react";
 import * as S from "./StyleTodoList";
 import { useSelector } from "react-redux";
 
-const TodoList = ({ ListAdd, setListAdd }) => {
+const TodoList = () => {
   const TodoData = useSelector((state) => state.todos);
   console.log(TodoData);
-  const ListDeleteBtn = (index) => {
-    let ListArray = [...ListAdd];
-    ListArray.splice(index, 1);
-    setListAdd(ListArray);
-  };
+
+  //   const ListDeleteBtn = (index) => {
+  //     let ListArray = [...ListAdd];
+  //     ListArray.splice(index, 1);
+  //     setListAdd(ListArray);
+  //   };
+
   return (
     <S.ListUl>
-      {ListAdd.map((text, index) => {
+      {TodoData.map((e, index) => {
         return (
           <S.ListLi key={index}>
-            <S.ListText>{text}</S.ListText>
+            <S.ListText>{e.text}</S.ListText>
             <S.ListLiBtnWrap>
               <S.ListEditBtn>수정</S.ListEditBtn>
-              <S.ListDeleteBtn
-                onClick={() => {
-                  ListDeleteBtn(index);
-                }}
-              >
-                삭제
-              </S.ListDeleteBtn>
+              <S.ListDeleteBtn>삭제</S.ListDeleteBtn>
             </S.ListLiBtnWrap>
           </S.ListLi>
         );
