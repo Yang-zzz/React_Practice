@@ -1,30 +1,34 @@
 import React from "react";
 import * as S from "./StyleTodoList";
+import { useSelector } from "react-redux";
 
-const TodoList = () => {
+const TodoList = ({ ListAdd, setListAdd }) => {
+  const TodoData = useSelector((state) => state.todos);
+  console.log(TodoData);
+  const ListDeleteBtn = (index) => {
+    let ListArray = [...ListAdd];
+    ListArray.splice(index, 1);
+    setListAdd(ListArray);
+  };
   return (
     <S.ListUl>
-      <S.ListLi>
-        <S.ListText>가나다라마바사</S.ListText>
-        <S.ListLiBtnWrap>
-          <S.ListEditBtn>수정</S.ListEditBtn>
-          <S.ListDeleteBtn>삭제</S.ListDeleteBtn>
-        </S.ListLiBtnWrap>
-      </S.ListLi>
-      <S.ListLi>
-        <S.ListText>가나다라마바사</S.ListText>
-        <S.ListLiBtnWrap>
-          <S.ListEditBtn>수정</S.ListEditBtn>
-          <S.ListDeleteBtn>삭제</S.ListDeleteBtn>
-        </S.ListLiBtnWrap>
-      </S.ListLi>
-      <S.ListLi>
-        <S.ListText>가나다라마바사</S.ListText>
-        <S.ListLiBtnWrap>
-          <S.ListEditBtn>수정</S.ListEditBtn>
-          <S.ListDeleteBtn>삭제</S.ListDeleteBtn>
-        </S.ListLiBtnWrap>
-      </S.ListLi>
+      {ListAdd.map((text, index) => {
+        return (
+          <S.ListLi key={index}>
+            <S.ListText>{text}</S.ListText>
+            <S.ListLiBtnWrap>
+              <S.ListEditBtn>수정</S.ListEditBtn>
+              <S.ListDeleteBtn
+                onClick={() => {
+                  ListDeleteBtn(index);
+                }}
+              >
+                삭제
+              </S.ListDeleteBtn>
+            </S.ListLiBtnWrap>
+          </S.ListLi>
+        );
+      })}
     </S.ListUl>
   );
 };
