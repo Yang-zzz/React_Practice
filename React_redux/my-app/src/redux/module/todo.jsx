@@ -1,5 +1,4 @@
 // 초깃값
-// const initialState = { todos: [{ text: "" }] };
 const initialState = { todos: [] };
 
 // 액션 생성함수
@@ -17,3 +16,6 @@ export const reducer = (state = initialState, action) => {
   }
   return state;
 };
+
+// state의 모습은 initialState 와 같다.
+// state
