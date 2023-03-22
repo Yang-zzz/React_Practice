@@ -1,10 +1,12 @@
 // 초깃값
 const initialState = { todos: [] };
+// initialState 를
 
 // 액션 생성함수
 export const addTodo = (payload) => {
   return { type: "LIST_ADD", payload };
 };
+// 액션생성 함수는 
 
 // 리듀서 함수
 export const reducer = (state = initialState, action) => {
